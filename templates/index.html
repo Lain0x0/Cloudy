@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="styles/styles.css">
-    <meta charset="UTF-8">
-    <title>Cloudy Storage</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../styles/styles.css">
+  <meta charset="utf-8">
+  <title>Cloudy Storage</title>
 </head>
 <body>
-    <div class="container">
-        <button type="file" class="upload-button">
-            UPLOAD
-        </button>
-        <div class="bg"></div>
-    </div>
+  <div id="container">
+    <label for="fileInput"><i class="fas fa-cloud-upload-alt"></i></label>
+    <input type="file" id="fileInput" multiple />
+    <label for="ButtonClick"></label>
+    <form method="POST">
+    <button type="button" id="ButtonClick"> PUSH </button>
+    </form>
+  </div>
 </body>
 </html>
