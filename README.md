@@ -33,7 +33,7 @@ We welcome contributions to enhance Cloudy. For reference, you may find these re
   <br>
 <a href="http://creativecommons.org/publicdomain/zero/1.0/">Licensing</a>
 </ul>
-
+```
 This project is licensed under the Creative Commons Attribution 4.0 International License. Please review the detailed license terms below:
 
 Creative Commons Attribution 4.0 International Public License
@@ -82,3 +82,4 @@ Unenforceable Provisions: Provisions deemed unenforceable will be reformed to th
 Creative Commons is not a party to its public licenses and does not provide legal services or advice. The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication.
 
 For further details, visit Creative Commons.
+```
