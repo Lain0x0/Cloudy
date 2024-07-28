@@ -1,19 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" href="../styles/styles.css">
+  <script src="/static/script/script.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap" rel="stylesheet">
   <meta charset="utf-8">
-  <title>Cloudy Storage</title>
+  <title>Cloudy</title>
 </head>
 <body>
   <div id="container">
-    <label for="fileInput"><i class="fas fa-cloud-upload-alt"></i></label>
-    <input type="file" id="fileInput" multiple />
-    <label for="ButtonClick"></label>
-    <form method="POST">
-    <button type="button" id="ButtonClick"> PUSH </button>
-    </form>
+    <img src="https://i.ibb.co/1Tz86QZ/cloudu.png" id="bg" alt="bg-pic">
+    <h3 class="adlam-display-regular">Cloudy</h3>
   </div>
+
+  <!-- File upload form -->
+  <form id="uploadForm" enctype="multipart/form-data">
+    <div id="fileDropArea" class="container">
+      <input type="file" id="upload" name="files[]" multiple>
+      <button id="UploadBtn"></button>
+      <!-- Add a label for the file input to make the icon clickable -->
+      <label for="upload">
+        <img src="https://i.ibb.co/gtSKh6P/upload.png" id="uploadPng">
+      </label>
+      <h4 id="click">Click or Drag & Drop to Upload</h4>
+      <p id="UploadTxt">Upload anything, anywhere</p>
+      <!-- Use type="submit" to trigger form submission -->
+      <button type="submit" id="ButtonPush">PUSH</button>
+    </div>
+  </form>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('upload');
+    const uploadButton = document.getElementById('ButtonPush');
+
+    // Handle the file upload button click event
+    uploadButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default button behavior
+        const files = fileInput.files;
+        
+        if (files.length === 0) {
+            console.error('No files selected');
+            return;
+        }
+        
+        uploadFiles(files);
+    });
+
+    function uploadFiles(files) {
+        const formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+            formData.append('files[]', files[i]);
+        }
+
+        // AJAX request to upload files
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost:3000/uploads', true); // Ensure this URL matches your backend setup
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        console.log('Uploaded file paths:', response.filePaths);
+                        // You can now use the file paths as needed
+                    } catch (error) {
+                        console.error('Error parsing response:', error);
+                    }
+                } else {
+                    console.error('Error occurred while uploading files. Status:', xhr.status);
+                }
+            }
+        };
+
+        xhr.onerror = function() {
+            console.error('Error occurred while uploading files.');
+        };
+
+        xhr.send(formData);
+    }
+});
+
+  </script>
 </body>
 </html>
